@@ -11,7 +11,7 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
     @Inject
     @Named("Client")
-    private Repository<ClientDTO> repo;
+    private Repository<ClientDTO> rep;
     @Override
     public List<ClientDTO> list() {
         return repo.list();
