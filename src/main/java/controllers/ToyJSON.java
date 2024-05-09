@@ -1,5 +1,6 @@
 package controllers;
 
+import Service.Impl.ToyServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
@@ -7,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mapper.dto.ToysDto;
+import mapping.dto.dto.ToyDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +22,7 @@ public class ToyJSON extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletInputStream jsonStream = req.getInputStream();
         ObjectMapper mapper = new ObjectMapper();
-        ToysDto toy = mapper.readValue(jsonStream, ToysDto.class);
+        ToyDTO toy = mapper.readValue(jsonStream, ToyDTO.class);
         resp.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = resp.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -46,9 +47,9 @@ public class ToyJSON extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<ToysDto> students = service.listToys();
+        List<ToyDTO> toys = service.listToys();
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(students);
+        String json = mapper.writeValueAsString(toys);
         resp.setContentType("application/json");
         resp.getWriter().write(json);
     }

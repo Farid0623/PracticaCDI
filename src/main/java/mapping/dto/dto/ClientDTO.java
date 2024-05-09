@@ -1,4 +1,8 @@
 package mapping.dto.dto;
 
-public record ClientDTO() {
+import java.util.Date;
+
+public record   ClientDTO(int client_cedula,
+                          String client_name,
+                          Date client_age) {
 }

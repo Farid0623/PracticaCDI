@@ -1,13 +1,17 @@
 package controllers;
 
+import Service.ClientService;
+import Service.Impl.LoginServiceSessionImpl;
+import Service.LoginService;
 import com.fasterxml.jackson.annotation.JacksonInject;
+import jakarta.inject.Named;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mapper.dto.ClientDto;
+import mapping.dto.dto.ClientDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password =  req.getParameter("password");
         if(USERNAME.equals(username) && PASWORD.equals(password)) {
-            List<ClientDto> clientDTOList = cService.list();
+            List<ClientDTO> clientDTOList = cService.list();
             getServletContext().setAttribute("clientDTOservice", clientDTOList);
             Cookie usernameCookie = new Cookie("username", username);
             resp.addCookie(usernameCookie);
