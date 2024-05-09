@@ -1,4 +1,4 @@
-package mapper;
+package mapping.mappers;
 
 import mapper.dto.ToysDto;
 import model.Toy;
