@@ -1,12 +1,15 @@
 package Service.Impl;
 
 import mapper.dto.ClientDto;
+import mapping.dto.dto.ClientDTO;
 import mapping.dto.dto.ToyDTO;
 import mapping.mappers.ClientMapper;
 import mapping.mappers.ToyMapper;
 import model.Client;
 import model.Toy;
 import repository.Repository;
+import repository.impl.ClientRepositoryImplJDBC;
+import repository.impl.ToyRepositoryJDBCImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,7 +20,7 @@ public class ToyServiceImpl implements Service {
     private Repository<Client> clientRepository;
     public ToyServiceImpl() {
         this.toyRepository = new ToyRepositoryJDBCImpl();
-        this.clientRepository = new ClientRepositoryJDBCImpl();
+        this.clientRepository = new ClientRepositoryImplJDBC();
     }
 
 
@@ -33,12 +36,12 @@ public class ToyServiceImpl implements Service {
 
 
     @Override
-    public void addClient(ClientDto clientDTO) {
+    public void addClient(ClientDTO clientDTO) {
         clientRepository.save(ClientMapper.mapFromDTO(clientDTO));
     }
 
     @Override
-    public List<ClientDto> listClients() {
+    public List<ClientDTO> listClients() {
         return clientRepository.list()
                 .stream()
                 .map(ClientMapper::mapFromModel)
